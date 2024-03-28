@@ -4,6 +4,7 @@
 <div class="grid">
 {% for comic in comics %}
     <div class="comic">
+        <h2>{{ comic.metadata.name }}</h2>
         <a href="?comic={{ comic.id }}&page=1">
             <img src="{{ comic.metadata.preview }}" alt="{{ comic.metadata.name }} cover page"/>
         </a>
