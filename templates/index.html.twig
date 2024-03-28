@@ -9,7 +9,9 @@
             <img src="{{ comic.metadata.preview }}" alt="{{ comic.metadata.name }} cover page"/>
         </a>
         <div class="metadata">
-        <span class="fi fi-{{ comic.metadata.language }}"></span>
+            <span class="fi fi-{{ comic.metadata.language }}"></span>
+            Tags: {{ comic.metadata.contentWarnings | join(', ') }}<br>
+            <small>By {{ comic.metadata.members | join(', ') }}</small>
         </div>
     </div>
 {% endfor %}
