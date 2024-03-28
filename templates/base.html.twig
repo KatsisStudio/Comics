@@ -8,11 +8,11 @@
         <meta property="og:title" content="Katsis Comics"/>
         <meta property="og:image" content="https://katsis.net/img/logo.png">
         {% else %}
-        <title>{{ metadata.metadata.name }}</title>
-        <meta property="og:title" content="{{ metadata.metadata.name }}"/>
-        <meta property="og:image" content="https://blog.katsis.net/{{ metadata.metadata.preview }}">
-        <meta property="og:description" content="{{ metadata.metadata.description }}"/>
-        <meta name="description" content="{{ metadata.metadata.description }}">
+        <title>{{ metadata.name }}</title>
+        <meta property="og:title" content="{{ metadata.name }}"/>
+        <meta property="og:image" content="https://blog.katsis.net/{{ metadata.preview }}">
+        <meta property="og:description" content="{{ metadata.description }}"/>
+        <meta name="description" content="{{ metadata.description }}">
         {% endif %}
         <meta name="theme-color" content="#ff7f7f">
 
