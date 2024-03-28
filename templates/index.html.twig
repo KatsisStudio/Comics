@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div class="grid">
+{% for comic in comics %}
+    <div class="comic">
+        <a href="?comic={{ comic.id }}&page=1">
+            <img src="{{ comic.metadata.preview }}" alt="{{ comic.metadata.name }} cover page"/>
+        </a>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

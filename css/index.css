@@ -14,15 +14,25 @@ body {
     background-color: #464646;
 }
 
-img {
+#page img {
     margin-top: 10px;
     max-height: calc(90vh - 50px);
     max-width: 100vw;
 }
 
+.comic img {
+    max-height: 500px;
+}
+
 .center {
     display: flex;
     justify-content: center;
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
 }
 
 button {

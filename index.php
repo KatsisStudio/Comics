@@ -9,6 +9,17 @@ use Twig\Environment;
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
+function parseMetadata($path) {
+    $id = basename($path);
+    $metadata = json_decode(file_get_contents("$path/info.json"), true);
+    $metadata["preview"] = "comics/" . $id . "/assets/" . $metadata["preview"];
+
+    return [
+        "id" => basename($path),
+        "metadata" => $metadata
+    ];
+}
+
 if (isset($_GET["comic"]))
 {
     $metadata = json_decode(file_get_contents("comics/". $_GET["comic"] . "/info.json"), true);
@@ -34,8 +45,9 @@ if (isset($_GET["comic"]))
 }
 else
 {
-    echo $twig->render("redirect.html.twig", [
+    $comics = glob("comics/*", GLOB_ONLYDIR);
+    echo $twig->render("index.html.twig", [
         "metadata" => null,
-        "page" => 'https://katsis.net'
+        "comics" => array_map("parseMetadata", $comics)
     ]);
 }
