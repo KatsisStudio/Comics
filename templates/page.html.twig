@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-<div>
-    <img src="comics/{{ comic }}//pages/{{ page }}.png" alt="Page {{ page }}"/>
+<div class="center" id="page" data-name="{{ metadata.name }}" data-comic="{{ comic }}" data-count="{{ metadata.page_count }}" data-page="{{ page }}">
+    <img src="comics/{{ comic }}/pages/{{ page }}.png" alt="Page {{ page }}"/>
 </div>
 {% endblock %}

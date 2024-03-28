@@ -8,3 +8,8 @@ html {
 img {
     max-height: 90vh;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+}

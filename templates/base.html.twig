@@ -10,13 +10,14 @@
         {% else %}
         <title>{{ metadata.name }}</title>
         <meta property="og:title" content="{{ metadata.name }}"/>
-        <meta property="og:image" content="https://blog.katsis.net/{{ metadata.preview }}">
+        <meta property="og:image" content="https://comic.katsis.net/{{ metadata.preview }}">
         <meta property="og:description" content="{{ metadata.description }}"/>
         <meta name="description" content="{{ metadata.description }}">
         {% endif %}
         <meta name="theme-color" content="#ff7f7f">
 
         <link rel="stylesheet" type="text/css" href="css/index.css"/>
+        <script src="js/loader.js"></script>
     </head>
     <body>
     {% block content %}{% endblock %}
