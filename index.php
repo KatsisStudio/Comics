@@ -1,0 +1,14 @@
+<?php
+
+require_once "vendor/autoload.php";
+
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
+
+
+$loader = new FilesystemLoader(["templates"]);
+$twig = new Environment($loader);
+
+echo $twig->render("index.html.twig", [
+    "articles" => array_map("parseMetadata", $files),
+]);
