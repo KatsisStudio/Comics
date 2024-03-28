@@ -8,6 +8,9 @@
         <a href="?comic={{ comic.id }}&page=1">
             <img src="{{ comic.metadata.preview }}" alt="{{ comic.metadata.name }} cover page"/>
         </a>
+        <div class="metadata">
+        <span class="fi fi-{{ comic.metadata.language }}"></span>
+        </div>
     </div>
 {% endfor %}
 </div>
