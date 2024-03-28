@@ -5,12 +5,32 @@ html {
     line-height: 1.5em;
 }
 
+body {
+    margin: 0;
+}
+
+#banner {
+    height: 40px;
+    background-color: #464646;
+}
+
 img {
-    max-height: 90vh;
+    margin-top: 10px;
+    max-height: calc(90vh - 50px);
     max-width: 100vw;
 }
 
 .center {
     display: flex;
     justify-content: center;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+button:hover {
+    color: #1e1e1e;
 }

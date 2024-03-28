@@ -4,33 +4,55 @@ let img;
 function previousPage()
 {
     const index = parseInt(page.dataset.page);
-    page.dataset.page = index - 1;
-    img.src = `comics/${page.dataset.comic}/pages/${index - 1}.png`;
-    window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${index - 1}`);
+
+    if (index > 1)
+    {
+        page.dataset.page = index - 1;
+        img.src = `comics/${page.dataset.comic}/pages/${index - 1}.png`;
+        window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${index - 1}`);
+    }
 }
 
 function nextPage()
 {
     const index = parseInt(page.dataset.page);
-    page.dataset.page = index + 1;
-    img.src = `comics/${page.dataset.comic}/pages/${index + 1}.png`;
-    window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${index + 1}`);
+
+    if (index < parseInt(page.dataset.count))
+    {
+        page.dataset.page = index + 1;
+        img.src = `comics/${page.dataset.comic}/pages/${index + 1}.png`;
+        window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${index + 1}`);
+    }
+}
+
+function firstPage()
+{
+    page.dataset.page = 1;
+    img.src = `comics/${page.dataset.comic}/pages/${1}.png`;
+    window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${1}`);
+}
+
+function lastPage()
+{
+    const last = parseInt(page.dataset.count);
+
+    page.dataset.page = last;
+    img.src = `comics/${page.dataset.comic}/pages/${last}.png`;
+    window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${last}`);
 }
 
 window.addEventListener("load", _ => {
     page = document.getElementById("page");
     img = page.querySelector("img");
-    page.addEventListener("click", (e) => {
+    img.addEventListener("click", (e) => {
         var rect = e.target.getBoundingClientRect();
         var x = e.clientX - rect.left;
 
-        const index = parseInt(page.dataset.page);
-
-        if (x < rect.width && index > 1)
+        if (x < rect.width / 2)
         {
             previousPage();
         }
-        else if (x > rect.width / 2 && index < parseInt(page.dataset.count))
+        else if (x > rect.width / 2)
         {
             nextPage();
         }
@@ -39,16 +61,10 @@ window.addEventListener("load", _ => {
 
 window.addEventListener("keyup", e => {
     if (e.key == "ArrowLeft") {
-        const index = parseInt(page.dataset.page);
-        if (index > 1) {
-            previousPage();
-        }
+        previousPage();
     }
     else if (e.key == "ArrowRight") {
-        const index = parseInt(page.dataset.page);
-        if (index < parseInt(page.dataset.count)) {
-            nextPage();
-        }
+        nextPage();
     }
 });
 
