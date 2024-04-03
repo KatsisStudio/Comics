@@ -12,6 +12,7 @@ body {
 .center {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .grid {
@@ -20,12 +21,30 @@ body {
     flex-flow: wrap;
 }
 
-button {
+#banner {
+    height: 40px;
+    background-color: #464646;
+    margin-bottom: 10px;
+}
+
+
+button, .button {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    
     background-color: transparent;
     border: none;
     color: white;
 }
 
-button:hover {
+button:hover, .button:hover {
     color: #1e1e1e;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }

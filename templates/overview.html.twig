@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+<div id="banner">
+    <a class="button" href="/"><span class="material-symbols-outlined">home</span></a>
+</div>
 <div class="grid">
 {% for i in range(1, metadata.page_count) %}
 <div class="page-preview">
