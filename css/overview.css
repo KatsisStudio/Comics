@@ -13,3 +13,7 @@ h1 {
 #header {
     margin-bottom: 100px;
 }
+
+.grid {
+    column-gap: 20px;
+}

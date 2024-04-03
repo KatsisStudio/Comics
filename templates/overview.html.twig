@@ -8,6 +8,14 @@
     <h1>{{ metadata.name }}</h1>
     <div class="grid">
         <img src="{{ metadata.preview }}" alt="{{ metadata.name }} cover"/>
+        <div>
+            <h2>Tags</h2>
+            {{ metadata.contentWarnings | join(', ') }}
+            <h2>Authors</h2>
+            {{ metadata.members | join(', ') }}
+            <h2>Language</h2>
+            <span class="fi fi-{{ metadata.language }}"></span>
+        </div>
     </div>
 </div>
 <div class="grid">
