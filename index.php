@@ -25,21 +25,23 @@ if (isset($_GET["comic"]))
     $metadata = json_decode(file_get_contents("comics/". $_GET["comic"] . "/info.json"), true);
     $metadata["preview"] = "comics/" . $_GET["comic"] . "/assets/" . $metadata["preview"];
 
+    $pages = array_filter(glob("comics/" . $_GET["comic"] . "/pages/*"), 'is_file');    
+    $metadata["page_count"] = count($pages);
     if (!isset($_GET["page"]))
     {
-        echo $twig->render("redirect.html.twig", [
+        echo $twig->render("overview.html.twig", [
             "metadata" => $metadata,
-            "target" => 'https://comic.katsis.net?comic=' . $_GET["comic"] . '&page=1'
+            "comic" => $_GET["comic"],
+            "css" => "overview"
         ]);
     }
     else
     {
-        $pages = array_filter(glob("comics/" . $_GET["comic"] . "/pages/*"), 'is_file');    
-        $metadata["page_count"] = count($pages);
         echo $twig->render("page.html.twig", [
             "metadata" => $metadata,
             "comic" => $_GET["comic"],
-            "page" => $_GET["page"]
+            "page" => $_GET["page"],
+            "css" => "page"
         ]);
     }
 }
@@ -48,6 +50,7 @@ else
     $comics = glob("comics/*", GLOB_ONLYDIR);
     echo $twig->render("index.html.twig", [
         "metadata" => null,
-        "comics" => array_map("parseMetadata", $comics)
+        "comics" => array_map("parseMetadata", $comics),
+        "css" => "index"
     ]);
 }

@@ -5,7 +5,7 @@
 {% for comic in comics %}
     <div class="comic">
         <h2>{{ comic.metadata.name }}</h2>
-        <a href="?comic={{ comic.id }}&page=1">
+        <a href="?comic={{ comic.id }}">
             <img src="{{ comic.metadata.preview }}" alt="{{ comic.metadata.name }} cover page"/>
         </a>
         <div class="metadata">

@@ -1,0 +1,10 @@
+#banner {
+    height: 40px;
+    background-color: #464646;
+}
+
+img {
+    margin-top: 10px;
+    max-height: calc(90vh - 50px);
+    max-width: 100vw;
+}
