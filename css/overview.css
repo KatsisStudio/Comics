@@ -5,3 +5,11 @@
 img {
     max-height: 500px;
 }
+
+h1 {
+    text-align: center;
+}
+
+#header {
+    margin-bottom: 100px;
+}

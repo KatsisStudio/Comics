@@ -4,11 +4,17 @@
 <div id="banner">
     <a class="button" href="/"><span class="material-symbols-outlined">home</span></a>
 </div>
+<div id="header">
+    <h1>{{ metadata.name }}</h1>
+    <div class="grid">
+        <img src="{{ metadata.preview }}" alt="{{ metadata.name }} cover"/>
+    </div>
+</div>
 <div class="grid">
 {% for i in range(1, metadata.page_count) %}
 <div class="page-preview">
     <a href="?comic={{ comic }}&page={{ i }}">
-        <img src="comics/{{ comic }}/pages/{{ i }}.png" alt="{{ comic.metadata.name }} page {{ i }}"/>
+        <img src="comics/{{ comic }}/pages/{{ i }}.png" alt="{{ metadata.name }} page {{ i }}"/>
     </a>
 </div>
 {% endfor %}
