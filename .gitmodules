@@ -1,6 +1,6 @@
 [submodule "comics/1"]
 	path = comics/1
-	url = ./git/MWIAQ
+	url = ./MWIAQ
 [submodule "comics/2"]
 	path = comics/2
-	url = ./git/TDGMP
+	url = ./TDGMP
