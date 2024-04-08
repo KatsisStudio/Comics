@@ -10,6 +10,7 @@
         </a>
         <div class="metadata">
             <span class="fi fi-{{ comic.metadata.language }}"></span>
+            {{ comic.metadata.page_count }} pages<br>
             Tags: {{ comic.metadata.contentWarnings | join(', ') }}<br>
             <small>By {{ comic.metadata.members | join(', ') }}</small>
         </div>

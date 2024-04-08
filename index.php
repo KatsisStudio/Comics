@@ -14,6 +14,10 @@ function parseMetadata($path) {
     $metadata = json_decode(file_get_contents("$path/info.json"), true);
     $metadata["preview"] = "comics/" . $id . "/assets/" . $metadata["preview"];
 
+    $pages = array_filter(glob("comics/" . $id . "/pages/*"), 'is_file');    
+    $metadata["page_format"] = pathinfo($pages[0])["extension"];
+    $metadata["page_count"] = count($pages);
+
     return [
         "id" => basename($path),
         "metadata" => $metadata
@@ -22,11 +26,7 @@ function parseMetadata($path) {
 
 if (isset($_GET["comic"]))
 {
-    $metadata = json_decode(file_get_contents("comics/". $_GET["comic"] . "/info.json"), true);
-    $metadata["preview"] = "comics/" . $_GET["comic"] . "/assets/" . $metadata["preview"];
-
-    $pages = array_filter(glob("comics/" . $_GET["comic"] . "/pages/*"), 'is_file');    
-    $metadata["page_count"] = count($pages);
+    $metadata = parseMetadata("comics/". $_GET["comic"])["metadata"];
     if (!isset($_GET["page"]))
     {
         echo $twig->render("overview.html.twig", [

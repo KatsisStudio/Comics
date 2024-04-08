@@ -13,8 +13,8 @@
             {{ metadata.contentWarnings | join(', ') }}
             <h2>Authors</h2>
             {{ metadata.members | join(', ') }}
-            <h2>Language</h2>
-            <span class="fi fi-{{ metadata.language }}"></span>
+            <h2>Others</h2>
+            {{ metadata.page_count }} pages <span class="fi fi-{{ metadata.language }}"></span>
         </div>
     </div>
 </div>
@@ -22,7 +22,7 @@
 {% for i in range(1, metadata.page_count) %}
 <div class="page-preview">
     <a href="?comic={{ comic }}&page={{ i }}">
-        <img src="comics/{{ comic }}/pages/{{ i }}.png" alt="{{ metadata.name }} page {{ i }}"/>
+        <img src="comics/{{ comic }}/pages/{{ i }}.{{ metadata.page_format }}" alt="{{ metadata.name }} page {{ i }}"/>
     </a>
 </div>
 {% endfor %}

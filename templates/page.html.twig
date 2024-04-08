@@ -12,6 +12,6 @@
     </div>
 </div>
 <div class="center" id="page" data-name="{{ metadata.name }}" data-comic="{{ comic }}" data-count="{{ metadata.page_count }}" data-page="{{ page }}">
-    <img src="comics/{{ comic }}/pages/{{ page }}.png" alt="Page {{ page }}"/>
+    <img src="comics/{{ comic }}/pages/{{ page }}.{{ metadata.page_format }}" alt="Page {{ page }}"/>
 </div>
 {% endblock %}
