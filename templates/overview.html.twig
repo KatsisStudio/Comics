@@ -7,7 +7,9 @@
 <div id="header">
     <h1>{{ metadata.name }}</h1>
     <div class="grid">
-        <img src="{{ metadata.preview }}" alt="{{ metadata.name }} cover"/>
+        <a href="?comic={{ comic }}&page=1">
+            <img src="{{ metadata.preview }}" alt="{{ metadata.name }} cover"/>
+        </a>
         <div>
             <h2>Tags</h2>
             {{ metadata.contentWarnings | join(', ') }}
