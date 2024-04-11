@@ -8,7 +8,7 @@ function previousPage()
     if (index > 1)
     {
         page.dataset.page = index - 1;
-        img.src = `comics/${page.dataset.comic}/pages/${index - 1}.png`;
+        img.src = `comics/${page.dataset.comic}/pages/${index - 1}.${page.dataset.format}`;
         window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${index - 1}`);
     }
 }
@@ -20,7 +20,7 @@ function nextPage()
     if (index < parseInt(page.dataset.count))
     {
         page.dataset.page = index + 1;
-        img.src = `comics/${page.dataset.comic}/pages/${index + 1}.png`;
+        img.src = `comics/${page.dataset.comic}/pages/${index + 1}.${page.dataset.format}`;
         window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${index + 1}`);
     }
 }
@@ -28,7 +28,7 @@ function nextPage()
 function firstPage()
 {
     page.dataset.page = 1;
-    img.src = `comics/${page.dataset.comic}/pages/${1}.png`;
+    img.src = `comics/${page.dataset.comic}/pages/${1}.${page.dataset.format}`;
     window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${1}`);
 }
 
@@ -37,7 +37,7 @@ function lastPage()
     const last = parseInt(page.dataset.count);
 
     page.dataset.page = last;
-    img.src = `comics/${page.dataset.comic}/pages/${last}.png`;
+    img.src = `comics/${page.dataset.comic}/pages/${last}.${page.dataset.format}`;
     window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${last}`);
 }
 
@@ -73,5 +73,5 @@ window.addEventListener("popstate", _ => {
     const pageParam = urlParams.get('page');
 
     page.dataset.page = pageParam;
-    img.src = `comics/${page.dataset.comic}/pages/${pageParam}.png`;
+    img.src = `comics/${page.dataset.comic}/pages/${pageParam}.${page.dataset.format}`;
 });
