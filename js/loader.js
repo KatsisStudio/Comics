@@ -1,15 +1,21 @@
 let page;
 let img;
 
+function updatePage(pageIndex)
+{
+    page.dataset.page = pageIndex;
+    img.src = `comics/${page.dataset.comic}/pages/${pageIndex}.${page.dataset.format}`;
+    window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${pageIndex}`);
+    document.getElementById("page-current").innerHTML = pageIndex;
+}
+
 function previousPage()
 {
     const index = parseInt(page.dataset.page);
 
     if (index > 1)
     {
-        page.dataset.page = index - 1;
-        img.src = `comics/${page.dataset.comic}/pages/${index - 1}.${page.dataset.format}`;
-        window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${index - 1}`);
+        updatePage(index - 1);
     }
 }
 
@@ -19,30 +25,27 @@ function nextPage()
 
     if (index < parseInt(page.dataset.count))
     {
-        page.dataset.page = index + 1;
-        img.src = `comics/${page.dataset.comic}/pages/${index + 1}.${page.dataset.format}`;
-        window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${index + 1}`);
+        updatePage(index + 1);
     }
 }
 
 function firstPage()
 {
-    page.dataset.page = 1;
-    img.src = `comics/${page.dataset.comic}/pages/${1}.${page.dataset.format}`;
-    window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${1}`);
+    updatePage(1);
 }
 
 function lastPage()
 {
     const last = parseInt(page.dataset.count);
 
-    page.dataset.page = last;
-    img.src = `comics/${page.dataset.comic}/pages/${last}.${page.dataset.format}`;
-    window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${last}`);
+    updatePage(last);
 }
 
 window.addEventListener("load", _ => {
     page = document.getElementById("page");
+
+    document.getElementById("page-count").innerHTML = page.dataset.count;
+
     img = page.querySelector("img");
     img.addEventListener("click", (e) => {
         var rect = e.target.getBoundingClientRect();
@@ -74,4 +77,5 @@ window.addEventListener("popstate", _ => {
 
     page.dataset.page = pageParam;
     img.src = `comics/${page.dataset.comic}/pages/${pageParam}.${page.dataset.format}`;
+    document.getElementById("page-current").innerHTML = pageParam;
 });

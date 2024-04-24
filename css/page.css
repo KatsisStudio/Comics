@@ -9,6 +9,13 @@ img {
     margin-right: 80px;
 }
 
+.banner-right {
+    position: absolute;
+    right: 10px;
+    height: 40px;
+    font-weight: 600;
+}
+
 .line {
     display: flex;
 }

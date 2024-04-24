@@ -10,6 +10,9 @@
         <button onclick="nextPage()"><span class="material-symbols-outlined">chevron_right</span></button>
         <button onclick="lastPage()"><span class="material-symbols-outlined">last_page</span></button>
     </div>
+    <div class="center banner-right">
+        <span id="page-current">{{ page }}</span>/<span id="page-count">0</span>
+    </div>
 </div>
 <div class="center" id="page" data-name="{{ metadata.name }}" data-comic="{{ comic }}" data-count="{{ metadata.page_count }}" data-page="{{ page }}" data-format="{{ metadata.page_format }}">
     <img src="comics/{{ comic }}/pages/{{ page }}.{{ metadata.page_format }}" alt="Page {{ page }}"/>
