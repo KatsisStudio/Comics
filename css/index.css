@@ -10,3 +10,7 @@
 .comic img {
     max-height: 500px;
 }
+
+#logo {
+    width: 40px;
+}

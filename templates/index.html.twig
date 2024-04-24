@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-<div class="grid">
+<div id="banner">
+    <a class="button" href="https://katsis.net"><img id="logo" src="img/logo.svg" alt="Logo"/></a>
+</div>
+<div class="header grid">
 {% for comic in comics | sort((a, b) => a.metadata.last_update <=> b.metadata.last_update) %}
     <div class="comic">
         <h2>{{ comic.metadata.name }}</h2>
