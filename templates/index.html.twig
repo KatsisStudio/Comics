@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="grid">
-{% for comic in comics | reverse %}
+{% for comic in comics | sort((a, b) => a.metadata.last_update <=> b.metadata.last_update) %}
     <div class="comic">
         <h2>{{ comic.metadata.name }}</h2>
         <a href="?comic={{ comic.id }}">

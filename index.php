@@ -14,7 +14,8 @@ function parseMetadata($path) {
     $metadata = json_decode(file_get_contents("$path/info.json"), true);
     $metadata["preview"] = "comics/" . $id . "/assets/" . $metadata["preview"];
 
-    $pages = array_filter(glob("comics/" . $id . "/pages/*"), 'is_file');    
+    $pages = array_filter(glob("comics/" . $id . "/pages/*"), 'is_file');
+    $metadata["last_update"] = filemtime(end($pages));
     $metadata["page_format"] = pathinfo($pages[0])["extension"];
     $metadata["page_count"] = count($pages);
     
