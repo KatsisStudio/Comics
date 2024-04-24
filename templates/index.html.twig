@@ -6,7 +6,7 @@
     <div class="comic">
         <h2>{{ comic.metadata.name }}</h2>
         <a href="?comic={{ comic.id }}">
-            <img src="{{ comic.metadata.preview }}" alt="{{ comic.metadata.name }} cover page"/>
+            <img src="{{ comic.metadata.preview_small }}" alt="{{ comic.metadata.name }} cover page"/>
         </a>
         <div class="metadata">
             <span class="fi fi-{{ comic.metadata.language }}"></span>

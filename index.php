@@ -17,6 +17,9 @@ function parseMetadata($path) {
     $pages = array_filter(glob("comics/" . $id . "/pages/*"), 'is_file');    
     $metadata["page_format"] = pathinfo($pages[0])["extension"];
     $metadata["page_count"] = count($pages);
+    
+    $thumbnailExtension = pathinfo($metadata["preview"])["extension"];
+    $metadata["preview_small"] = "comics/" . $id . "/previews/thumbnail." . $thumbnailExtension;
 
     return [
         "id" => basename($path),
