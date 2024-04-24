@@ -14,7 +14,7 @@
         <span id="page-current">{{ page }}</span>/<span id="page-count">0</span>
     </div>
 </div>
-<div class="center" id="page" data-name="{{ metadata.name }}" data-comic="{{ comic }}" data-count="{{ metadata.page_count }}" data-page="{{ page }}" data-format="{{ metadata.page_format }}">
-    <img src="comics/{{ comic }}/pages/{{ page }}.{{ metadata.page_format }}" alt="Page {{ page }}"/>
+<div class="center" id="page" data-name="{{ metadata.name }}" data-comic="{{ comic }}" data-count="{{ metadata.page_count }}" data-page="{{ page }}" data-formats="{{ metadata.page_format | join(";") }}">
+    <img src="comics/{{ comic }}/pages/{{ page }}.{{ metadata.page_format[page - 1] }}" alt="Page {{ page }}"/>
 </div>
 {% endblock %}

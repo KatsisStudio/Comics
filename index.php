@@ -15,9 +15,17 @@ function parseMetadata($path) {
     $metadata["preview"] = "comics/" . $id . "/assets/" . $metadata["preview"];
 
     $pages = array_filter(glob("comics/" . $id . "/pages/*"), 'is_file');
-    $metadata["last_update"] = filemtime(end($pages));
-    $metadata["page_format"] = pathinfo($pages[0])["extension"];
-    $metadata["page_count"] = count($pages);
+    $pagesInfo = array();
+    foreach ($pages as $page)
+    {
+        $data = pathinfo($page);
+        $pagesInfo[intval($data["filename"])] = $data;
+    }
+    ksort($pagesInfo);
+    $lastPage = end($pagesInfo);
+    $metadata["last_update"] = filemtime($lastPage["dirname"] . "/" . $lastPage["basename"]);
+    $metadata["page_format"] = array_map(function(array $page): string { return $page["extension"]; }, $pagesInfo);
+    $metadata["page_count"] = count($pagesInfo);
     
     $thumbnailExtension = pathinfo($metadata["preview"])["extension"];
     $metadata["preview_small"] = "comics/" . $id . "/previews/thumbnail." . $thumbnailExtension;

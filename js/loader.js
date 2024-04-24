@@ -1,10 +1,12 @@
 let page;
 let img;
+let formats;
 
 function updatePage(pageIndex)
 {
     page.dataset.page = pageIndex;
-    img.src = `comics/${page.dataset.comic}/pages/${pageIndex}.${page.dataset.format}`;
+    img.src = `comics/${page.dataset.comic}/pages/${pageIndex}.${formats[pageIndex - 1]}`;
+    img.alt = `Page ${pageIndex}`;
     window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${pageIndex}`);
     document.getElementById("page-current").innerHTML = pageIndex;
 }
@@ -45,6 +47,7 @@ window.addEventListener("load", _ => {
     page = document.getElementById("page");
 
     document.getElementById("page-count").innerHTML = page.dataset.count;
+    formats = page.dataset.formats.split(";");
 
     img = page.querySelector("img");
     img.addEventListener("click", (e) => {
@@ -76,6 +79,7 @@ window.addEventListener("popstate", _ => {
     const pageParam = urlParams.get('page');
 
     page.dataset.page = pageParam;
-    img.src = `comics/${page.dataset.comic}/pages/${pageParam}.${page.dataset.format}`;
+    img.src = `comics/${page.dataset.comic}/pages/${pageParam}.${formats[pageParam - 1]}`;
+    img.alt = `Page ${pageParam}`;
     document.getElementById("page-current").innerHTML = pageParam;
 });
