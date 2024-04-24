@@ -24,7 +24,7 @@
 {% for i in range(1, metadata.page_count) %}
 <div class="page-preview">
     <a href="?comic={{ comic }}&page={{ i }}">
-        <img src="comics/{{ comic }}/pages/{{ i }}.{{ metadata.page_format }}" alt="{{ metadata.name }} page {{ i }}"/>
+        <img src="comics/{{ comic }}/previews/{{ i }}.{{ metadata.page_format }}" alt="{{ metadata.name }} page {{ i }}"/>
     </a>
 </div>
 {% endfor %}
