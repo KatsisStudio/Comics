@@ -16,7 +16,7 @@
             <h2>Authors</h2>
             {{ metadata.members | join(', ') }}
             <h2>Status</h2>
-            {{ metadata.status }}
+            {{ metadata.status | title }}
             <h2>Others</h2>
             {{ metadata.page_count }} pages <span class="fi fi-{{ metadata.language }}"></span>
         </div>
