@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="grid">
-{% for comic in comics %}
+{% for comic in comics | reverse %}
     <div class="comic">
         <h2>{{ comic.metadata.name }}</h2>
         <a href="?comic={{ comic.id }}">
