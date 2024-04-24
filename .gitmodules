@@ -6,4 +6,4 @@
 	url = ../TDGMP
 [submodule "comics/3"]
 	path = comics/3
-	url = https://github.com/KatsisStudio/AMastersDuty
+	url = ../AMastersDuty
