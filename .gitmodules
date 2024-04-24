@@ -7,3 +7,6 @@
 [submodule "comics/3"]
 	path = comics/3
 	url = ../AMastersDuty
+[submodule "comics/4"]
+	path = comics/4
+	url = ../MWIAQold
