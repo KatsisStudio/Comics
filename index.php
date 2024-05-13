@@ -22,6 +22,8 @@ function parseMetadata($path) {
         $pagesInfo[intval($data["filename"])] = $data;
     }
     ksort($pagesInfo);
+    $lastPage = end($pagesInfo);
+    $metadata["last_update"] = filemtime($lastPage["dirname"] . "/" . $lastPage["basename"]);
     $metadata["page_format"] = array_map(function(array $page): string { return $page["extension"]; }, $pagesInfo);
     $metadata["page_count"] = count($pagesInfo);
     
@@ -57,33 +59,10 @@ if (isset($_GET["comic"]))
 }
 else
 {
-    if (!file_exists(".metadata"))
-    {
-        file_put_contents(".metadata", "{}");
-        $data = [];
-    }
-    else
-    {
-        $data = json_decode(file_get_contents(".metadata"), true);
-    }
-
     $comics = glob("comics/*", GLOB_ONLYDIR);
-    $finalComics = array_map("parseMetadata", $comics);
-    foreach ($finalComics as $f)
-    {
-        if (array_key_exists($f["id"], $data))
-        {
-            $f["last_update"] = $data[$f["id"]];
-        }
-        else
-        {
-            $f["last_update"] = 0;
-        }
-    }
-
     echo $twig->render("index.html.twig", [
         "metadata" => null,
-        "comics" => $finalComics,
+        "comics" => array_map("parseMetadata", $comics),
         "css" => "index"
     ]);
 }
