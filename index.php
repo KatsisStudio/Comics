@@ -9,6 +9,11 @@ use Twig\Environment;
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
+$json = isset($_GET["json"]) && $_GET["json"] === "1";
+if ($json) {
+    header('Content-Type: application/json; charset=utf-8');
+}
+
 function parseMetadata($path) {
     $id = basename($path);
     $metadata = json_decode(file_get_contents("$path/info.json"), true);
@@ -41,28 +46,47 @@ if (isset($_GET["comic"]))
     $metadata = parseMetadata("comics/". $_GET["comic"])["metadata"];
     if (!isset($_GET["page"]))
     {
-        echo $twig->render("overview.html.twig", [
-            "metadata" => $metadata,
-            "comic" => $_GET["comic"],
-            "css" => "overview"
-        ]);
+        if ($json) {
+            echo json_encode([
+                "metadata" => $metadata,
+                "comic" => $_GET["comic"]
+            ]);
+        } else {
+            echo $twig->render("overview.html.twig", [
+                "metadata" => $metadata,
+                "comic" => $_GET["comic"],
+                "css" => "overview"
+            ]);
+        }
     }
     else
     {
-        echo $twig->render("page.html.twig", [
-            "metadata" => $metadata,
-            "comic" => $_GET["comic"],
-            "page" => $_GET["page"],
-            "css" => "page"
-        ]);
+        if ($json) {
+            echo json_encode([
+                "metadata" => $metadata,
+                "comic" => $_GET["comic"],
+                "page" => $_GET["page"]
+            ]);
+        } else {
+            echo $twig->render("page.html.twig", [
+                "metadata" => $metadata,
+                "comic" => $_GET["comic"],
+                "page" => $_GET["page"],
+                "css" => "page"
+            ]);
+        }
     }
 }
 else
 {
     $comics = glob("comics/*", GLOB_ONLYDIR);
-    echo $twig->render("index.html.twig", [
-        "metadata" => null,
-        "comics" => array_map("parseMetadata", $comics),
-        "css" => "index"
-    ]);
+    if ($json) {
+        echo json_encode(array_map("parseMetadata", $comics));
+    } else {
+        echo $twig->render("index.html.twig", [
+            "metadata" => null,
+            "comics" => array_map("parseMetadata", $comics),
+            "css" => "index"
+        ]);
+    }
 }
