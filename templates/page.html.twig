@@ -3,7 +3,7 @@
 {% block content %}
 <div id="banner" class="line">
     <a class="button" href="/"><span class="material-symbols-outlined">home</span></a>
-    <a class="button" href="?comic={{ comic }}"><span class="material-symbols-outlined">menu_book</span></a>
+    <a class="button" href="/{{ comic }}"><span class="material-symbols-outlined">menu_book</span></a>
     <div class="center banner-mid">
         <button onclick="firstPage()"><span class="material-symbols-outlined">first_page</span></button>
         <button onclick="previousPage()"><span class="material-symbols-outlined">chevron_left</span></button>
@@ -15,6 +15,6 @@
     </div>
 </div>
 <div class="center" id="page" data-name="{{ metadata.name }}" data-comic="{{ comic }}" data-count="{{ metadata.page_count }}" data-page="{{ page }}" data-formats="{{ metadata.page_format | join(";") }}">
-    <img src="comics/{{ comic }}/pages/{{ page }}.{{ metadata.page_format[page] }}" alt="Page {{ page }}"/>
+    <img src="/comics/{{ comic }}/pages/{{ page }}.{{ metadata.page_format[page] }}" alt="Page {{ page }}"/>
 </div>
 {% endblock %}

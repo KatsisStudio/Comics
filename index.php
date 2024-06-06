@@ -5,9 +5,12 @@ require_once "vendor/autoload.php";
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
-
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
+
+$urlData = array_filter(explode("/", substr($_SERVER["REQUEST_URI"], 1)));
+$comic = count($urlData) > 0 ? $urlData[0] : null;
+$page = count($urlData) > 1 ? $urlData[1] : null;
 
 $json = isset($_GET["json"]) && $_GET["json"] === "1";
 if ($json) {
@@ -41,20 +44,20 @@ function parseMetadata($path) {
     ];
 }
 
-if (isset($_GET["comic"]))
+if ($comic !== null)
 {
-    $metadata = parseMetadata("comics/". $_GET["comic"])["metadata"];
-    if (!isset($_GET["page"]))
+    $metadata = parseMetadata("comics/". $comic)["metadata"];
+    if ($page === null)
     {
         if ($json) {
             echo json_encode([
                 "metadata" => $metadata,
-                "comic" => $_GET["comic"]
+                "comic" => $comic
             ]);
         } else {
             echo $twig->render("overview.html.twig", [
                 "metadata" => $metadata,
-                "comic" => $_GET["comic"],
+                "comic" => $comic,
                 "css" => "overview"
             ]);
         }
@@ -64,14 +67,14 @@ if (isset($_GET["comic"]))
         if ($json) {
             echo json_encode([
                 "metadata" => $metadata,
-                "comic" => $_GET["comic"],
-                "page" => $_GET["page"]
+                "comic" => $comic,
+                "page" => $page
             ]);
         } else {
             echo $twig->render("page.html.twig", [
                 "metadata" => $metadata,
-                "comic" => $_GET["comic"],
-                "page" => $_GET["page"],
+                "comic" => $comic,
+                "page" => $page,
                 "css" => "page"
             ]);
         }

@@ -5,9 +5,9 @@ let formats;
 function updatePage(pageIndex)
 {
     page.dataset.page = pageIndex;
-    img.src = `comics/${page.dataset.comic}/pages/${pageIndex}.${formats[pageIndex - 1]}`;
+    img.src = `/comics/${page.dataset.comic}/pages/${pageIndex}.${formats[pageIndex - 1]}`;
     img.alt = `Page ${pageIndex}`;
-    window.history.pushState({}, page.dataset.name, `?comic=${page.dataset.comic}&page=${pageIndex}`);
+    window.history.pushState({}, page.dataset.name, `/${page.dataset.comic}/${pageIndex}`);
     document.getElementById("page-current").innerHTML = pageIndex;
 }
 
@@ -43,27 +43,29 @@ function lastPage()
     updatePage(last);
 }
 
-window.addEventListener("load", _ => {
-    page = document.getElementById("page");
+document.onreadystatechange = function () {
+    if (document.readyState == "interactive") {
+        page = document.getElementById("page");
 
-    document.getElementById("page-count").innerHTML = page.dataset.count;
-    formats = page.dataset.formats.split(";");
+        document.getElementById("page-count").innerHTML = page.dataset.count;
+        formats = page.dataset.formats.split(";");
 
-    img = page.querySelector("img");
-    img.addEventListener("click", (e) => {
-        var rect = e.target.getBoundingClientRect();
-        var x = e.clientX - rect.left;
-
-        if (x < rect.width / 2)
-        {
-            previousPage();
-        }
-        else if (x > rect.width / 2)
-        {
-            nextPage();
-        }
-    });
-});
+        img = page.querySelector("img");
+        img.addEventListener("click", (e) => {
+            var rect = e.target.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+    
+            if (x < rect.width / 2)
+            {
+                previousPage();
+            }
+            else if (x > rect.width / 2)
+            {
+                nextPage();
+            }
+        });
+    }
+};
 
 window.addEventListener("keyup", e => {
     if (e.key == "ArrowLeft") {
@@ -75,11 +77,10 @@ window.addEventListener("keyup", e => {
 });
 
 window.addEventListener("popstate", _ => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const pageParam = urlParams.get('page');
+    const pageParam = window.location.pathname.split("/").filter((e) => e)[1];
 
     page.dataset.page = pageParam;
-    img.src = `comics/${page.dataset.comic}/pages/${pageParam}.${formats[pageParam - 1]}`;
+    img.src = `/comics/${page.dataset.comic}/pages/${pageParam}.${formats[pageParam - 1]}`;
     img.alt = `Page ${pageParam}`;
     document.getElementById("page-current").innerHTML = pageParam;
 });
