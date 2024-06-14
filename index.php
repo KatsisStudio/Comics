@@ -8,7 +8,7 @@ use Twig\Environment;
 $loader = new FilesystemLoader(["templates"]);
 $twig = new Environment($loader);
 
-$urlData = array_filter(explode("/", substr($_SERVER["REQUEST_URI"], 1)));
+$urlData = array_filter(explode("/", substr(explode("?", $_SERVER["REQUEST_URI"])[0], 1)));
 $comic = count($urlData) > 0 ? $urlData[0] : null;
 $page = count($urlData) > 1 ? $urlData[1] : null;
 
