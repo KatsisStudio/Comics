@@ -52,6 +52,7 @@ document.onreadystatechange = function () {
 
         img = page.querySelector("img");
         img.addEventListener("click", (e) => {
+            img.removeAttribute("src");
             var rect = e.target.getBoundingClientRect();
             var x = e.clientX - rect.left;
     
