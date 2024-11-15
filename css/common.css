@@ -21,13 +21,6 @@ body {
     flex-flow: wrap;
 }
 
-#banner {
-    height: 40px;
-    background-color: #464646;
-    margin-bottom: 10px;
-}
-
-
 button, .button {
     height: 40px;
     width: 40px;

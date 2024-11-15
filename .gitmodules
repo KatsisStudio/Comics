@@ -10,3 +10,6 @@
 [submodule "comics/4"]
 	path = comics/4
 	url = ../MWIAQold
+[submodule "common"]
+	path = common
+	url = https://github.com/KatsisStudio/Website-Common
